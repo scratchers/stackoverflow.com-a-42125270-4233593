@@ -1,25 +1,23 @@
 <?php
 
-function urls(array $array) {
+function create_array(array $elements, $parentId = 0) {
 
-    static $path;
+    $branch = array();
 
-    foreach ($array AS $key => $value) {
+    foreach ($elements as $element) {
+        if ($element['parent_id'] == $parentId) {
 
-       if ($value['children']) {
-            urls($array[$key]['children']);
+
+            $children = create_array($elements, $element['id']);
+
+            if ($children) {
+                $element[$element['menu_nl']] = $children;
+            }
+
+
+            $branch[] = $element;
         }
-
-        if ( $value['parent_id'] != 0) {
-
-           $path[] = '/' . friendlyUrl($value['parent']) . '/' . friendlyUrl($value['menu_name']) . '/';
-
-        } else {
-
-           $path[] = '/' . friendlyUrl($value['menu_name']) . '/';
-        }
-
     }
-    return $pad;
 
+    return $branch;
 }
