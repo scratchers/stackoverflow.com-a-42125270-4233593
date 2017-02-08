@@ -11,7 +11,7 @@ function create_array(array $elements, $parentId = 0, $parentpath = '') {
 
         if ($element['parent_id'] == $parentId) {
 
-            // pass the fullpath down to it's children
+            // pass the fullpath down to its children
             $children = create_array($elements, $element['id'], $element['fullpath']);
 
             if ($children) {
