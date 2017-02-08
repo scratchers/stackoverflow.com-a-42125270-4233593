@@ -21,3 +21,7 @@ function create_array(array $elements, $parentId = 0) {
 
     return $branch;
 }
+
+$pages = require 'pages.php';
+
+print_r( create_array($pages) );
